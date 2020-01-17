@@ -8,7 +8,20 @@ import datetime
 from configparser import ConfigParser
 
 for index, name in enumerate(sr.Microphone.list_microphone_names()):
-    print("Microphone with name \"{1}\" 'Micsrophone(device_index={0})'".format(index, name))
+    print("Device with name \"{1}\" index {0}".format(index, name))
+
+microphoneIndex = -1
+audio = sr.Microphone.get_pyaudio().PyAudio()
+for i in range(audio.get_device_count()):
+    device_info = audio.get_device_info_by_index(i)
+
+    if device_info.get("maxInputChannels") > 0:
+        microphoneIndex = i
+        break
+
+if microphoneIndex < 0:
+    print("Microphone not found")
+    exit(1)
 
 # настройки
 opts = {
@@ -84,7 +97,7 @@ def execute_cmd(cmd):
 
 # запуск
 r = sr.Recognizer()
-m = sr.Microphone(device_index=1)
+m = sr.Microphone(device_index=microphoneIndex)
 
 with m as source:
     r.adjust_for_ambient_noise(source)
