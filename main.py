@@ -15,9 +15,8 @@ class Application(tk.Frame):
     def create_widgets(self):
         buttons_width = '25'
         buttons_height = '10'
-        wrap_length = str(int(buttons_width) * 1)
 
-        self.button_change_voice = tk.Button(self, text="Изменить голос \newef2wb  232323   23232323",
+        self.button_change_voice = tk.Button(self, text="Изменить голос",
                                              width=buttons_width, height=buttons_height)
         self.button_change_voice.pack(side=tk.LEFT)
 
