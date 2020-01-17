@@ -110,8 +110,8 @@ voices = speak_engine.getProperty('voices')
 ru_voices = []
 
 for voice in voices:
-    if voice.languages[0] == "ru_RU":
-        print("RU voice found: " + voice.name)
+    if "ru_RU" in voice.languages:
+        print("Russian voice found: " + voice.name)
         ru_voices.append(voice)
 
 if len(ru_voices) == 0:
