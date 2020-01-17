@@ -105,8 +105,20 @@ with m as source:
 speak_engine = pyttsx3.init()
 
 # Только если у вас установлены голоса для синтеза речи!
+
 voices = speak_engine.getProperty('voices')
-speak_engine.setProperty('voice', voices[4].id)
+ru_voices = []
+
+for voice in voices:
+    if voice.languages[0] == "ru_RU":
+        print("RU voice found: " + voice.name)
+        ru_voices.append(voice)
+
+if len(ru_voices) == 0:
+    print("No Russian voices found")
+    exit(1)
+
+speak_engine.setProperty('voice', ru_voices[0].id)
 
 # forced cmd test
 speak("Мой разработчик не научил меня анекдотам ... Ха ха ха")
