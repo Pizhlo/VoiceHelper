@@ -20,9 +20,9 @@ class Application(tk.Frame):
                                              width=buttons_width, height=buttons_height)
         self.button_change_voice.pack(side=tk.LEFT)
 
-        self.button_quit = tk.Button(self, text="Добавить профиль",
+        self.button_add_profile = tk.Button(self, text="Добавить профиль",
                                      width=buttons_width, height=buttons_height)
-        self.button_quit.pack(side=tk.LEFT)
+        self.button_add_profile.pack(side=tk.LEFT)
 
         self.button_make_new_command = tk.Button(self, text="Добавить команду",
                                                  width=buttons_width, height=buttons_height)
