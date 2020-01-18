@@ -11,12 +11,19 @@ class SpeakEngine:
         self.__selected_voice = None
         self.__finished_utterance_callback = finished_utterance_callback
 
-    def get_voices(self, language="ru_RU"):
-        """Только если у вас установлены голоса для синтеза речи!"""
+    def get_voices(self,
+                   language="ru_RU",  # alternative 1
+                   name="Russian"):  # alternative 2
+        """
+        Voices should be installed on system
+        Check languages array on Mac OS
+        On Windows 10 languages array is empty, check name field
+        """
         result = []
 
         for voice in self.__voices:
-            if language in voice.languages:
+
+            if language in voice.languages or name in voice.name:
                 print("Russian voice found: " + voice.name)
                 result.append(voice)
 
