@@ -23,7 +23,6 @@ class VoicesList(tk.Frame):
     def voice_list_did_select_item(self, event):
         """https://stackoverflow.com/a/12936031/3004003"""
         w = event.widget
-        index = int(w.curselection()[0])
-        value = w.get(index)
+        index = w.curselection()[0]
         self.voice_select_callback(index)
 
