@@ -1,4 +1,5 @@
 import pyttsx3
+from threading import Thread
 
 
 class SpeakEngine:
@@ -27,6 +28,11 @@ class SpeakEngine:
         self.__pyttsx3.setProperty('voice', voice.id)
 
     def speak(self, what):
+        thread = Thread(target=self.__speak, args=(what,))
+        thread.start()
+        thread.join()
+
+    def __speak(self, what):
         print(what)
         self.__pyttsx3.say(what)
         self.__pyttsx3.runAndWait()
