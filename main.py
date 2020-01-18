@@ -6,7 +6,7 @@ import tkinter as tk
 # import dop
 from voices_list import VoicesList
 from speak_engine import SpeakEngine
-from microphone import Microphone
+from recognizer import Recognizer
 
 
 class Application(tk.Frame):
@@ -17,7 +17,7 @@ class Application(tk.Frame):
         self.speak_engine = SpeakEngine(self.speak_engine_did_finish_utterance)
         self.voices = self.speak_engine.get_voices()
 
-        self.microphone = Microphone()
+        self.microphone = Recognizer()
 
         self.pack()
         self.create_widgets()
