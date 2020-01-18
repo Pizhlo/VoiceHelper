@@ -4,11 +4,12 @@ from threading import Thread
 
 class SpeakEngine:
 
-    def __init__(self):
+    def __init__(self, finished_utterance_callback):
         self.__pyttsx3 = pyttsx3.init()
         self.__pyttsx3.connect('finished-utterance', self.on_finished_utterance)
         self.__voices = self.__pyttsx3.getProperty("voices")
         self.__selected_voice = None
+        self.__finished_utterance_callback = finished_utterance_callback
 
     def get_voices(self, language="ru_RU"):
         """Только если у вас установлены голоса для синтеза речи!"""
@@ -39,3 +40,4 @@ class SpeakEngine:
 
     def on_finished_utterance(self, name, completed):
         print("on_finished_utterance")
+        self.__finished_utterance_callback()

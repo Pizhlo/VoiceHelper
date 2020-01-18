@@ -12,7 +12,7 @@ class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
-        self.speak_engine = SpeakEngine()
+        self.speak_engine = SpeakEngine(self.speak_engine_did_finish_utterance)
         self.voices = self.speak_engine.get_voices()
 
         self.pack()
@@ -46,6 +46,9 @@ class Application(tk.Frame):
         print("Voice selected: {0}".format(voice.name))
         self.speak_engine.set_voice(voice)
         self.speak_engine.speak("Мой разработчик не научил меня анекдотам ... Ха ха ха")
+
+    def speak_engine_did_finish_utterance(self):
+        print("utterance finished")
 
 
 def main():
