@@ -39,4 +39,3 @@ class SpeakEngine:
 
     def on_finished_utterance(self, name, completed):
         print("on_finished_utterance")
-        self.__pyttsx3.endLoop()
