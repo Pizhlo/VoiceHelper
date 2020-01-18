@@ -4,7 +4,7 @@
 
 import tkinter as tk
 import dop
-
+from voices_list import VoicesList
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -34,6 +34,8 @@ class Application(tk.Frame):
                                      command=self.master.destroy)  # TODO: change command
         self.button_quit.pack(side=tk.LEFT)
 
+        self.voices_list = VoicesList(dop.ru_voices)
+        self.voices_list.pack(side=tk.TOP, anchor=tk.W, padx=10, pady=10)
 
 # Окно
 

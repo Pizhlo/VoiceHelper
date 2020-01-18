@@ -121,7 +121,7 @@ if len(ru_voices) == 0:
 speak_engine.setProperty('voice', ru_voices[0].id)
 
 # forced cmd test
-speak("Мой разработчик не научил меня анекдотам ... Ха ха ха")
+# speak("Мой разработчик не научил меня анекдотам ... Ха ха ха")
 
 # speak("Добрый день, повелитель")
 # speak("Кеша слушает")
