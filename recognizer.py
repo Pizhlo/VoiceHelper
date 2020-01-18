@@ -7,6 +7,7 @@ from recognizer_commands import RecognizerCommands
 class Recognizer:
 
     def __init__(self, speak_engine):
+        self.recognition_is_running = False
         self.__speak_engine = speak_engine
         self.__init_recognition()
 
@@ -27,7 +28,10 @@ class Recognizer:
         if microphone_index >= 0:
             self.__recognizer = sr.Recognizer()
             self.__microphone = sr.Microphone(device_index=microphone_index)
-            self.__recognizer.adjust_for_ambient_noise(self.__microphone)
+
+            with self.__microphone as source:
+                self.__recognizer.adjust_for_ambient_noise(source)
+
             self.__commands = RecognizerCommands.default_commands
         else:
             print("Microphone not found")
@@ -63,11 +67,14 @@ class Recognizer:
         self.__execute_cmd(cmd['cmd'])
 
     def start_recognition(self):
+        self.recognition_is_running = True
         self.RecognizerCallback.command_callback = self.__process_cmd
         self.__stop_handler = self.__recognizer.listen_in_background(self.__microphone,
                                                                      self.RecognizerCallback.recognizer_callback)
 
     def stop_recognition(self):
+        self.recognition_is_running = False
+
         try:
             self.__stop_handler()
         except AttributeError:
@@ -83,17 +90,17 @@ class Recognizer:
                 commands = RecognizerCommands.default_commands
                 print("Распознано: " + voice)
 
-                if voice.startswith(commands["alias"]):
-                    # обращаются к Компьютеру
-                    cmd = voice
+                # if voice.startswith(commands["alias"]):
+                # обращаются к Компьютеру
+                cmd = voice
 
-                    for x in commands['alias']:
-                        cmd = cmd.replace(x, "").strip()
+                for x in commands['alias']:
+                    cmd = cmd.replace(x, "").strip()
 
-                    for x in commands['tbr']:
-                        cmd = cmd.replace(x, "").strip()
+                for x in commands['tbr']:
+                    cmd = cmd.replace(x, "").strip()
 
-                    Recognizer.RecognizerCallback.command_callback(cmd)
+                Recognizer.RecognizerCallback.command_callback(cmd)
 
             except sr.UnknownValueError:
                 print("Голос не распознан!")

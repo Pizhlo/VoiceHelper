@@ -1,9 +1,4 @@
-#
-# Пользовательский интерфейс настройки
-#
-
 import tkinter as tk
-# import dop
 from voices_list import VoicesList
 from speak_engine import SpeakEngine
 from recognizer import Recognizer
@@ -17,7 +12,7 @@ class Application(tk.Frame):
         self.speak_engine = SpeakEngine(self.speak_engine_did_finish_utterance)
         self.voices = self.speak_engine.get_voices()
 
-        self.microphone = Recognizer()
+        self.recognizer = Recognizer(self.speak_engine)
 
         self.pack()
         self.create_widgets()
@@ -27,7 +22,8 @@ class Application(tk.Frame):
         buttons_height = '10'
 
         self.button_change_voice = tk.Button(self, text="Изменить голос",
-                                             width=buttons_width, height=buttons_height)
+                                             width=buttons_width, height=buttons_height,
+                                             command=self.button_change_voice_click)
         self.button_change_voice.pack(side=tk.LEFT)
 
         self.button_add_profile = tk.Button(self, text="Добавить профиль",
@@ -56,6 +52,12 @@ class Application(tk.Frame):
     def speak_engine_did_finish_utterance(self):
         print("utterance finished")
         self.voices_list.state = tk.NORMAL
+
+    def button_change_voice_click(self):
+        if not self.recognizer.recognition_is_running:
+            self.recognizer.start_recognition()
+        else:
+            self.recognizer.stop_recognition()
 
 
 def main():
