@@ -34,8 +34,12 @@ class Application(tk.Frame):
                                      command=self.master.destroy)  # TODO: change command
         self.button_quit.pack(side=tk.LEFT)
 
-        self.voices_list = VoicesList(dop.ru_voices)
+        self.voices_list = VoicesList(dop.ru_voices, self.voice_list_did_select_item)
         self.voices_list.pack(side=tk.TOP, anchor=tk.W, padx=10, pady=10)
+
+    def voice_list_did_select_item(self, index):
+        print("Voice selected: {0}".format(dop.ru_voices[index].name))
+
 
 # Окно
 
