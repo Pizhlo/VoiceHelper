@@ -8,5 +8,5 @@ setup(
     license='',
     author='user',
     author_email='',
-    description=''
+    description='', install_requires=['fuzzywuzzy', 'pyttsx3']
 )
