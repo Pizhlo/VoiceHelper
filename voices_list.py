@@ -15,14 +15,14 @@ class VoicesList(tk.Frame):
 
         self.voices_listbox = tk.Listbox(self)
         self.voices_listbox.pack(side=tk.TOP, expand=1)
-        self.voices_listbox.bind("<<ListboxSelect>>", self.voice_list_did_select_item)
+        self.voices_listbox.bind("<<ListboxSelect>>", self.voices_list_did_select_voice)
 
         for voice in self.voices:
             self.voices_listbox.insert(tk.END, voice.name)
 
-    def voice_list_did_select_item(self, event):
+    def voices_list_did_select_voice(self, event):
         """https://stackoverflow.com/a/12936031/3004003"""
         w = event.widget
         index = w.curselection()[0]
-        self.voice_select_callback(index)
+        self.voice_select_callback(self.voices[index])
 

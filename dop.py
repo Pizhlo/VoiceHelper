@@ -3,7 +3,6 @@ import os
 import time
 import speech_recognition as sr
 from fuzzywuzzy import fuzz
-import pyttsx3
 import datetime
 from configparser import ConfigParser
 
@@ -33,14 +32,6 @@ opts = {
         "stupid1": ('расскажи анекдот', 'рассмеши меня', 'ты знаешь анекдоты')
     }
 }
-
-
-# функции
-def speak(what):
-    print(what)
-    speak_engine.say(what)
-    speak_engine.runAndWait()
-    speak_engine.stop()
 
 
 def callback(recognizer, audio):
@@ -82,17 +73,19 @@ def recognize_cmd(cmd):
 
 
 def execute_cmd(cmd):
-    if cmd == 'ctime':
-        # сказать текущее время
-        now = datetime.datetime.now()
-        speak("Сейчас " + str(now.hour) + ":" + str(now.minute))
-
-    elif cmd == 'stupid1':
-        # рассказать анекдот
-        speak("Мой разработчик не научил меня анекдотам ... Ха ха ха")
-
-    else:
-        print('Команда не распознана, повторите!')
+    print("implement")
+    # TODO: refactor
+    # if cmd == 'ctime':
+    #     # сказать текущее время
+    #     now = datetime.datetime.now()
+    #     speak("Сейчас " + str(now.hour) + ":" + str(now.minute))
+    #
+    # elif cmd == 'stupid1':
+    #     # рассказать анекдот
+    #     speak("Мой разработчик не научил меня анекдотам ... Ха ха ха")
+    #
+    # else:
+    #     print('Команда не распознана, повторите!')
 
 
 # запуск
@@ -101,30 +94,6 @@ m = sr.Microphone(device_index=microphoneIndex)
 
 with m as source:
     r.adjust_for_ambient_noise(source)
-
-speak_engine = pyttsx3.init()
-
-# Только если у вас установлены голоса для синтеза речи!
-
-voices = speak_engine.getProperty('voices')
-ru_voices = []
-
-for voice in voices:
-    if "ru_RU" in voice.languages:
-        print("Russian voice found: " + voice.name)
-        ru_voices.append(voice)
-
-if len(ru_voices) == 0:
-    print("No Russian voices found")
-    exit(1)
-
-speak_engine.setProperty('voice', ru_voices[0].id)
-
-# forced cmd test
-# speak("Мой разработчик не научил меня анекдотам ... Ха ха ха")
-
-# speak("Добрый день, повелитель")
-# speak("Кеша слушает")
 
 # stop_listening = r.listen_in_background(m, callback)
 # while True: time.sleep(0.1) # infinity loop

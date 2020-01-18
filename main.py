@@ -3,13 +3,18 @@
 #
 
 import tkinter as tk
-import dop
+# import dop
 from voices_list import VoicesList
+from speak_engine import SpeakEngine
+
 
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
+        self.speak_engine = SpeakEngine()
+        self.voices = self.speak_engine.get_voices()
+
         self.pack()
         self.create_widgets()
 
@@ -22,7 +27,7 @@ class Application(tk.Frame):
         self.button_change_voice.pack(side=tk.LEFT)
 
         self.button_add_profile = tk.Button(self, text="Добавить профиль",
-                                     width=buttons_width, height=buttons_height)
+                                            width=buttons_width, height=buttons_height)
         self.button_add_profile.pack(side=tk.LEFT)
 
         self.button_make_new_command = tk.Button(self, text="Добавить команду",
@@ -34,14 +39,14 @@ class Application(tk.Frame):
                                      command=self.master.destroy)  # TODO: change command
         self.button_quit.pack(side=tk.LEFT)
 
-        self.voices_list = VoicesList(dop.ru_voices, self.voice_list_did_select_item)
+        self.voices_list = VoicesList(self.voices, self.voices_list_did_select_voice)
         self.voices_list.pack(side=tk.TOP, anchor=tk.W, padx=10, pady=10)
 
-    def voice_list_did_select_item(self, index):
-        print("Voice selected: {0}".format(dop.ru_voices[index].name))
+    def voices_list_did_select_voice(self, voice):
+        print("Voice selected: {0}".format(voice.name))
+        self.speak_engine.set_voice(voice)
+        self.speak_engine.speak("Мой разработчик не научил меня анекдотам ... Ха ха ха")
 
-
-# Окно
 
 def main():
     root = tk.Tk()
