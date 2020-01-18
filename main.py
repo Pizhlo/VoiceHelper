@@ -6,14 +6,18 @@ import tkinter as tk
 # import dop
 from voices_list import VoicesList
 from speak_engine import SpeakEngine
+from microphone import Microphone
 
 
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
+
         self.speak_engine = SpeakEngine(self.speak_engine_did_finish_utterance)
         self.voices = self.speak_engine.get_voices()
+
+        self.microphone = Microphone()
 
         self.pack()
         self.create_widgets()
