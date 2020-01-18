@@ -44,11 +44,14 @@ class Application(tk.Frame):
 
     def voices_list_did_select_voice(self, voice):
         print("Voice selected: {0}".format(voice.name))
+        self.voices_list.state = tk.DISABLED
+
         self.speak_engine.set_voice(voice)
         self.speak_engine.speak("Мой разработчик не научил меня анекдотам ... Ха ха ха")
 
     def speak_engine_did_finish_utterance(self):
         print("utterance finished")
+        self.voices_list.state = tk.NORMAL
 
 
 def main():

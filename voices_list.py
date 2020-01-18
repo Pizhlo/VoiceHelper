@@ -6,6 +6,7 @@ class VoicesList(tk.Frame):
     def __init__(self, voices, voice_select_callback):
         super(VoicesList, self).__init__()
         self.voices = voices
+        self.state = tk.NORMAL
         self.voice_select_callback = voice_select_callback
         self.create_widgets()
 
@@ -19,6 +20,19 @@ class VoicesList(tk.Frame):
 
         for voice in self.voices:
             self.voices_listbox.insert(tk.END, voice.name)
+
+    @property
+    def state(self):
+        return self._state
+
+    @state.setter
+    def state(self, value):
+        self._state = value
+
+        try:
+            self.voices_listbox.configure(state=value)
+        except AttributeError:
+            pass
 
     def voices_list_did_select_voice(self, event):
         """https://stackoverflow.com/a/12936031/3004003"""
