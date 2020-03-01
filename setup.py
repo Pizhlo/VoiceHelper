@@ -8,11 +8,10 @@ Usage:
 from setuptools import setup
 
 APP = ["main.py"]
-DATA_FILES = ['/Users/user/PycharmProjects/Helper/main.py--', 'verbose']
 OPTIONS = {}
 
 setup(
-    name='Helper',
+    name='VoiceHelper',
     version='1.0.0',
     packages=[''],
     url='',

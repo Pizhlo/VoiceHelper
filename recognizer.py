@@ -4,6 +4,7 @@ from fuzzywuzzy import fuzz
 from recognizer_commands import RecognizerCommands
 
 
+
 class Recognizer:
 
     def __init__(self, speak_engine):
