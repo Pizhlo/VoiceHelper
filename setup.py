@@ -20,7 +20,6 @@ setup(
     author_email='',
     description='', install_requires=['fuzzywuzzy', 'pyttsx3'],
     app=APP,
-    data_files=DATA_FILES,
     options={'py2app': OPTIONS},
     setup_requires=['py2app']
 )

@@ -9,8 +9,8 @@ class Menu(tk.Frame):
 
     def create_widgets(self, commands):
         self.title_label = tk.Label(self, text="Меню")
-        self.title_label.pack(padx=50, pady=50)
+        self.title_label.pack(side=tk.TOP)
         self.menu_listbox = tk.Listbox(self)
-        self.menu_listbox.pack(padx=50, pady=70)
+        self.menu_listbox.pack(side=tk.TOP)
         for element in commands:
             self.menu_listbox.insert(tk.END, element)

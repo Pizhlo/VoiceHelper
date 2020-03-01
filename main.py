@@ -41,12 +41,16 @@ class Application(tk.Frame):
                                      command=self.master.destroy)  # TODO: change command
         self.button_quit.pack(side=tk.RIGHT, padx=300, pady=300)
 '''
-        self.voices_list = VoicesList(self.voices, self.voices_list_did_select_voice)
-        self.voices_list.pack(side=tk.TOP, anchor=tk.W, padx=10, pady=10)
-
         command_list = ["Добавить команду", "Изменить голос", "Выйти"]
         self.commands = Menu(command_list)
-        self.commands.pack(side=tk.LEFT)
+        self.commands.configure(bg="#CCC", border=2)
+        self.commands.pack(side=tk.TOP, anchor=tk.W, padx=10, pady=10, expand=1, fill=tk.Y)
+
+        self.content_frame = tk.Frame(self, bg="red", border=2, relief=tk.SUNKEN)
+        self.content_frame.pack(side=tk.LEFT, anchor=tk.N, expand=1, fill=tk.BOTH)
+
+        # self.voices_list = VoicesList(self.voices, self.voices_list_did_select_voice)
+        # self.voices_list.pack(side=tk.TOP, padx=10, pady=10)
 
     def voices_list_did_select_voice(self, voice):
         print("Voice selected: {0}".format(voice.name))
